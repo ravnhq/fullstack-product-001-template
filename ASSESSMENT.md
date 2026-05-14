@@ -53,4 +53,14 @@ All error responses (400, 404, 409, 500) must use the same envelope:
 
 The baseline code ships with **three deliberate bugs**. Finding and fixing them is part of the assessment.
 
+## Submitting
+
+When you're done, submit your work in one of two ways:
+
+- Press **`Cmd+Shift+Enter`** (macOS) or **`Ctrl+Shift+Enter`** (Linux/Windows), **or**
+- Press **`Cmd/Ctrl+Shift+P`** → type `Run Task` → pick **`Submit Assessment`**.
+
+A terminal panel will open and either confirm `✓ Submitted commit <sha>` or
+print the failure reason. You can close the Codespace after the green line.
+
 Good luck!

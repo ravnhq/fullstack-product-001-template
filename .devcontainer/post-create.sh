@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # AIP-27 / AIP-35 — candidate Codespaces post-create script.
 #
-# Runs once when the devcontainer first starts. Installs deps silently and
-# opens ASSESSMENT.md + NOTES.md in VS Code.
+# Runs once when the devcontainer first starts. Installs deps silently;
+# ASSESSMENT.md + NOTES.md are opened by post-attach.sh (postAttachCommand)
+# because `code` CLI is not yet wired to the editor during postCreateCommand.
 #
 # Trust-boundary invariants:
 #   - The ONLY upstream credential reaching the candidate environment is
@@ -43,8 +44,5 @@ fi
   pnpm install --ignore-workspace
 } >>"$HOME/.ravn-postcreate.log" 2>&1
 
-# 4. Open ASSESSMENT.md and NOTES.md if `code` is available (it is, inside Codespaces).
-if command -v code >/dev/null 2>&1; then
-  code --reuse-window ASSESSMENT.md || true
-  code --reuse-window NOTES.md || true
-fi
+# File-opening is intentionally NOT done here — the `code` CLI cannot reach
+# the editor until VS Code finishes attaching. See post-attach.sh.

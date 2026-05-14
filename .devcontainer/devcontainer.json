@@ -1,0 +1,42 @@
+{
+  "$schema": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json",
+  "name": "ravn-fullstack-product-001",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "forwardPorts": [3000, 5173],
+  "portsAttributes": {
+    "3000": { "label": "feedback-api", "onAutoForward": "silent" },
+    "5173": { "label": "spa", "onAutoForward": "silent" }
+  },
+  "remoteEnv": {
+    "RAVN_API_BASE": "${localEnv:RAVN_API_BASE}",
+    "RAVN_ASSESSMENT_TOKEN": "${localEnv:RAVN_ASSESSMENT_TOKEN}",
+    "ANTHROPIC_BASE_URL": "${localEnv:RAVN_API_BASE}/anthropic",
+    "ANTHROPIC_AUTH_TOKEN": "${localEnv:RAVN_ASSESSMENT_TOKEN}",
+    "OPENAI_BASE_URL": "${localEnv:RAVN_API_BASE}/openai/v1",
+    "OPENAI_API_KEY": "${localEnv:RAVN_ASSESSMENT_TOKEN}"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "vitest.explorer",
+        "eamodio.gitlens",
+        "anthropic.claude-code"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "workbench.startupEditor": "none",
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "workbench.tips.enabled": false,
+        "workbench.welcomePage.walkthroughs.openOnInstall": false
+      }
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+  "remoteUser": "node"
+}
